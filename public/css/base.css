@@ -148,12 +148,13 @@ header p {
   position: fixed;
   bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateZ(0);
+  -webkit-transform: translateX(-50%) translateZ(0);
   width: calc(100% - 32px);
   max-width: 440px;
   background: var(--glass-bg);
-  backdrop-filter: blur(32px) saturate(210%);
-  -webkit-backdrop-filter: blur(32px) saturate(210%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: 40px;
   display: flex;
@@ -161,9 +162,12 @@ header p {
   padding: 8px 10px;
   z-index: 1000;
   box-shadow: 
-    0 20px 48px -8px rgba(0, 0, 0, 0.35),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+    0 16px 40px -8px rgba(0, 0, 0, 0.3),
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.5);
   transition: var(--transition);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .is-desktop .bottom-nav {

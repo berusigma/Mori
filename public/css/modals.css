@@ -172,8 +172,9 @@
 
 .modal-content {
   background: var(--glass-bg);
-  backdrop-filter: blur(32px) saturate(210%);
-  -webkit-backdrop-filter: blur(32px) saturate(210%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  transform: translateZ(0);
   width: 90%;
   max-width: 420px;
   border: 1px solid var(--glass-border);
