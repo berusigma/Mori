@@ -160,30 +160,36 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2000;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease;
 }
 
 .modal-content {
-  background-color: var(--bg-color);
-  width: 100%;
-  max-width: 400px;
-  border: 1px solid var(--primary);
-  border-radius: var(--radius-xl);
+  background: var(--glass-bg);
+  backdrop-filter: blur(32px) saturate(210%);
+  -webkit-backdrop-filter: blur(32px) saturate(210%);
+  width: 90%;
+  max-width: 420px;
+  border: 1px solid var(--glass-border);
+  border-radius: 32px;
   overflow: hidden;
-  animation: modalContentEntrance 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 
+    0 24px 56px -8px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
+  animation: modalContentEntrance 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   will-change: transform, opacity;
 }
 
 @keyframes modalContentEntrance {
   0% {
     opacity: 0;
-    transform: translateY(14px) scale(0.97);
+    transform: translateY(20px) scale(0.94);
   }
   100% {
     opacity: 1;
@@ -192,8 +198,8 @@
 }
 
 .modal-header {
-  padding: 16px;
-  border-bottom: 1px solid var(--primary);
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--glass-border-subtle);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -201,19 +207,30 @@
 
 .modal-header h3 {
   font-size: 1rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 80%;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .modal-header button {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
   color: var(--text-main);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
 }
 
 .modal-body {

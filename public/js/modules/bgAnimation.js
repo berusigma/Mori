@@ -9,8 +9,11 @@ let width = window.innerWidth;
 let height = window.innerHeight;
 let dpr = window.devicePixelRatio || 1;
 
-let isEnabled = localStorage.getItem("mori_bg_animated") === "true";
-let currentShape = localStorage.getItem("mori_bg_shape") || "stars";
+let isEnabled =
+  localStorage.getItem("mori_bg_animated") === null
+    ? true
+    : localStorage.getItem("mori_bg_animated") === "true";
+let currentShape = localStorage.getItem("mori_bg_shape") || "bubbles";
 let currentBrightness = parseInt(
   localStorage.getItem("mori_bg_brightness") || "150",
   10,
