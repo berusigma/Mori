@@ -47,8 +47,7 @@ jobs:
           ./gradlew assembleDebug assembleRelease
           cd ..
           mkdir -p dist-assets
-          cp android/app/build/outputs/apk/debug/app-debug.apk "dist-assets/Mori-v${VERSION}-Android-Debug.apk" || true
-          cp android/app/build/outputs/apk/release/app-release-unsigned.apk "dist-assets/Mori-v${VERSION}-Android-Release-Unsigned.apk" || true
+          find android/app/build/outputs/apk -name "*.apk" -exec cp {} dist-assets/ \;
 
       - name: Upload Android Artifacts
         uses: actions/upload-artifact@v4
