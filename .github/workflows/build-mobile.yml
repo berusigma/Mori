@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '21'
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -52,21 +52,9 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleRelease assembleDebug
           cd ..
-          if [ -f "android/app/build/outputs/apk/release/Mori v${VERSION}.apk" ]; then
-            cp "android/app/build/outputs/apk/release/Mori v${VERSION}.apk" "dist-assets/Mori-v${VERSION}-Android-Release.apk"
-          elif [ -f "android/app/build/outputs/apk/release/app-release-unsigned.apk" ]; then
-            cp "android/app/build/outputs/apk/release/app-release-unsigned.apk" "dist-assets/Mori-v${VERSION}-Android-Release.apk"
-          else
-            find android/app/build/outputs/apk/release -name "*.apk" -exec cp {} "dist-assets/Mori-v${VERSION}-Android-Release.apk" \;
-          fi
-
-          if [ -f "android/app/build/outputs/apk/debug/Mori v${VERSION}.apk" ]; then
-            cp "android/app/build/outputs/apk/debug/Mori v${VERSION}.apk" "dist-assets/Mori-v${VERSION}-Android-Debug.apk"
-          elif [ -f "android/app/build/outputs/apk/debug/app-debug.apk" ]; then
-            cp "android/app/build/outputs/apk/debug/app-debug.apk" "dist-assets/Mori-v${VERSION}-Android-Debug.apk"
-          else
-            find android/app/build/outputs/apk/debug -name "*.apk" -exec cp {} "dist-assets/Mori-v${VERSION}-Android-Debug.apk" \;
-          fi
+          
+          find android/app/build/outputs/apk/release -name "*.apk" -exec cp {} "dist-assets/Mori-v${VERSION}-Android-Release.apk" \;
+          find android/app/build/outputs/apk/debug -name "*.apk" -exec cp {} "dist-assets/Mori-v${VERSION}-Android-Debug.apk" \;
 
       - name: Upload Android Artifacts
         uses: actions/upload-artifact@v4
