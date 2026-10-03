@@ -4,8 +4,11 @@ on:
   release:
     types: [published]
   push:
+    branches:
+      - master
+      - main
     tags:
-      - "v*"
+      - 'v*'
   workflow_dispatch:
 
 jobs:
