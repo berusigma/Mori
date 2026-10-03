@@ -44,6 +44,12 @@ jobs:
       - name: Sync Capacitor Android
         run: npx cap sync android
 
+      - name: Setup Keystore
+        run: |
+          if [ ! -f "android/app/release.keystore" ]; then
+            keytool -genkeypair -v -keystore android/app/release.keystore -alias mori -keyalg RSA -keysize 2048 -validity 10000 -storepass android123 -keypass android123 -dname "CN=Mori, OU=App, O=Mori, L=City, S=State, C=ID"
+          fi
+
       - name: Build Android APK
         run: |
           VERSION=$(node -p "require('./package.json').version")
