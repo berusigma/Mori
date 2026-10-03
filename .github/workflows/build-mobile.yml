@@ -43,6 +43,7 @@ jobs:
         run: |
           VERSION=$(node -p "require('./package.json').version")
           chmod +x android/gradlew
+          keytool -genkey -v -keystore android/app/release.keystore -alias mori -keyalg RSA -keysize 2048 -validity 10000 -storepass android123 -keypass android123 -dname "CN=Mori, OU=Mori, O=Mori, L=City, S=State, C=US"
           cd android
           ./gradlew assembleDebug assembleRelease
           cd ..
