@@ -1,0 +1,609 @@
+/* RYSAV — Liquid Glass theme. Loaded last so it can restyle everything. */
+
+/* ---------- Tokens ---------- */
+:root {
+  --rg-accent: #0a84ff;
+  --rg-accent-hi: #55adff;
+  --rg-ink: #12163a;
+  --rg-ink-2: rgba(18, 22, 58, 0.62);
+  --rg-fill: rgba(255, 255, 255, 0.46);
+  --rg-fill-2: rgba(255, 255, 255, 0.68);
+  --rg-fill-inner: rgba(255, 255, 255, 0.4);
+  --rg-sheen: rgba(255, 255, 255, 0.55);
+  --rg-line: rgba(255, 255, 255, 0.72);
+  --rg-line-strong: rgba(255, 255, 255, 0.95);
+  --rg-hair: rgba(18, 22, 58, 0.09);
+  --rg-hl: rgba(255, 255, 255, 0.95);
+  --rg-shadow-rgb: 52, 62, 140;
+  --rg-menu-fill: rgba(250, 251, 255, 0.9);
+  --rg-sheet-fill: rgba(248, 250, 255, 0.82);
+  --rg-scrim: rgba(24, 30, 80, 0.28);
+  --rg-orb-1: rgba(120, 148, 255, 0.85);
+  --rg-orb-2: rgba(255, 170, 214, 0.8);
+  --rg-orb-3: rgba(120, 224, 255, 0.8);
+  --rg-orb-4: rgba(190, 160, 255, 0.7);
+  --rg-blur: 22px;
+  --rg-sat: 180%;
+  --rg-r: 22px;
+  --rg-r-lg: 28px;
+
+  --bg-color: #dfe6ff;
+  --bg-rgb: 223, 230, 255;
+  --surface: rgba(255, 255, 255, 0.5);
+  --surface-rgb: 255, 255, 255;
+  --text-main: var(--rg-ink);
+  --text-secondary: var(--rg-ink-2);
+  --on-primary: #fff;
+  --radius-l: 16px;
+  --radius-xl: 22px;
+  /* accent: inline style from applyColorAccent() must not win */
+  --primary: #0a84ff !important;
+  --primary-rgb: 10, 132, 255 !important;
+}
+
+[data-theme="dark"] {
+  --rg-ink: #f5f6ff;
+  --rg-ink-2: rgba(235, 238, 255, 0.6);
+  --rg-fill: rgba(255, 255, 255, 0.085);
+  --rg-fill-2: rgba(255, 255, 255, 0.15);
+  --rg-fill-inner: rgba(255, 255, 255, 0.07);
+  --rg-sheen: rgba(255, 255, 255, 0.13);
+  --rg-line: rgba(255, 255, 255, 0.16);
+  --rg-line-strong: rgba(255, 255, 255, 0.32);
+  --rg-hair: rgba(255, 255, 255, 0.1);
+  --rg-hl: rgba(255, 255, 255, 0.34);
+  --rg-shadow-rgb: 0, 0, 0;
+  --rg-menu-fill: rgba(30, 34, 78, 0.94);
+  --rg-sheet-fill: rgba(26, 30, 70, 0.86);
+  --rg-scrim: rgba(2, 4, 18, 0.5);
+  --rg-orb-1: rgba(70, 53, 255, 0.55);
+  --rg-orb-2: rgba(255, 61, 154, 0.28);
+  --rg-orb-3: rgba(0, 163, 255, 0.4);
+  --rg-orb-4: rgba(139, 61, 255, 0.4);
+  --rg-accent-hi: #4da3ff;
+
+  --bg-color: #070a1f;
+  --bg-rgb: 7, 10, 31;
+  --surface: rgba(255, 255, 255, 0.07);
+  --surface-rgb: 40, 44, 92;
+}
+
+body.glass-subtle {
+  --rg-blur: 22px;
+}
+body.glass-deep {
+  --rg-blur: 40px;
+  --rg-sat: 210%;
+}
+body.glass-off {
+  --rg-blur: 0px;
+  --rg-sat: 100%;
+  --rg-fill: rgba(255, 255, 255, 0.92);
+  --rg-fill-inner: rgba(255, 255, 255, 0.7);
+}
+[data-theme="dark"] body.glass-off {
+  --rg-fill: rgba(28, 32, 72, 0.96);
+  --rg-fill-inner: rgba(255, 255, 255, 0.07);
+}
+body.corner-sharp {
+  --rg-r: 10px;
+  --rg-r-lg: 14px;
+}
+body.corner-round {
+  --rg-r: 26px;
+  --rg-r-lg: 34px;
+}
+
+/* ---------- Aurora backdrop ---------- */
+html {
+  background: var(--bg-color);
+}
+body {
+  background: transparent !important;
+  color: var(--rg-ink);
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: -15%;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 32% at 18% 14%, var(--rg-orb-1), transparent 70%),
+    radial-gradient(34% 30% at 86% 22%, var(--rg-orb-2), transparent 70%),
+    radial-gradient(42% 36% at 70% 88%, var(--rg-orb-3), transparent 70%),
+    radial-gradient(30% 28% at 8% 80%, var(--rg-orb-4), transparent 70%);
+  animation: rgDrift 30s ease-in-out infinite alternate;
+}
+@keyframes rgDrift {
+  from {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(2%, 2%, 0) scale(1.08);
+  }
+}
+body.anim-off::before {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+}
+
+body.font-display,
+body.font-default {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter",
+    system-ui, sans-serif;
+}
+
+/* Page entrance without filter (filter would break backdrop-filter of cards) */
+@keyframes rgEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+:root body[class] .page-content:not(.hidden) {
+  animation: rgEnter 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ---------- Header & greeting ---------- */
+header h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+  color: var(--rg-ink);
+  margin-bottom: 0;
+}
+.dynamic-greeting {
+  margin: 28px 0 6px;
+}
+.dynamic-greeting #greetingText {
+  font-size: 1.7rem;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  opacity: 1;
+}
+.dynamic-greeting #greetingStats {
+  font-size: 0.85rem;
+  margin-top: 6px;
+  opacity: 1;
+  color: var(--rg-ink-2);
+}
+
+/* ---------- Glass surfaces (outer: blurred) ---------- */
+:root body[class][class] :is(
+    .media-card,
+    .result-card,
+    .history-item,
+    .settings-list,
+    .settings-menu-item,
+    .skeleton-card,
+    .bg-anim-card,
+    .path-setting-item,
+    .download-bubble-dropup,
+    .custom-toast
+  ) {
+  background:
+    linear-gradient(155deg, var(--rg-sheen), transparent 42%), var(--rg-fill) !important;
+  -webkit-backdrop-filter: blur(var(--rg-blur)) saturate(var(--rg-sat)) !important;
+  backdrop-filter: blur(var(--rg-blur)) saturate(var(--rg-sat)) !important;
+  border: 1px solid var(--rg-line) !important;
+  border-radius: var(--rg-r-lg) !important;
+  box-shadow:
+    inset 0 1px 0 var(--rg-hl),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+    0 12px 32px rgba(var(--rg-shadow-rgb), 0.16) !important;
+}
+:root body[class][class] :is(.history-item, .settings-menu-item, .path-setting-item) {
+  border-radius: var(--rg-r) !important;
+}
+
+/* inner glass: no extra blur, just tint */
+:root body[class][class] :is(
+    .custom-select,
+    .path-display-pill,
+    .dbd-item,
+    .menu-icon,
+    .back-btn-settings,
+    .bg-shape-card,
+    .path-preset-chip,
+    .filter-chip,
+    .platform-chip,
+    .badge
+  ) {
+  background: var(--rg-fill-inner) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  border: 1px solid var(--rg-line) !important;
+  border-radius: calc(var(--rg-r) - 6px) !important;
+  box-shadow: inset 0 1px 0 var(--rg-hl) !important;
+}
+:root body[class][class] :is(.back-btn-settings, .path-preset-chip, .filter-chip, .platform-chip) {
+  border-radius: 999px !important;
+}
+:root body[class][class] .bg-shape-card.active,
+:root body[class][class] .path-preset-chip.active {
+  background: var(--rg-accent) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  color: #fff !important;
+}
+
+.settings-item {
+  border-bottom-color: var(--rg-hair) !important;
+}
+.settings-menu-item:hover {
+  transform: none;
+  background-color: var(--rg-fill-2) !important;
+}
+.menu-icon {
+  color: var(--rg-accent);
+}
+
+/* ---------- Input & primary action ---------- */
+:root body[class][class] input[type="text"] {
+  background:
+    linear-gradient(155deg, var(--rg-sheen), transparent 55%), var(--rg-fill) !important;
+  -webkit-backdrop-filter: blur(var(--rg-blur)) saturate(var(--rg-sat));
+  backdrop-filter: blur(var(--rg-blur)) saturate(var(--rg-sat));
+  border: 1px solid var(--rg-line) !important;
+  border-radius: 999px !important;
+  box-shadow:
+    inset 0 1px 0 var(--rg-hl),
+    0 8px 24px rgba(var(--rg-shadow-rgb), 0.12) !important;
+  color: var(--rg-ink);
+}
+:root body[class][class] input[type="text"]:focus {
+  border-color: var(--rg-accent) !important;
+  box-shadow:
+    inset 0 1px 0 var(--rg-hl),
+    0 0 0 4px rgba(10, 132, 255, 0.25),
+    0 8px 24px rgba(var(--rg-shadow-rgb), 0.12) !important;
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--rg-ink-2);
+  opacity: 1;
+}
+.search-icon {
+  filter: none;
+  color: var(--rg-ink-2);
+}
+.input-action-btn {
+  color: var(--rg-ink-2);
+}
+.input-action-btn:hover,
+.batch-toggle-btn.active {
+  color: var(--rg-accent);
+}
+.batch-url-textarea {
+  background: var(--rg-fill) !important;
+  border: 1px solid var(--rg-line) !important;
+  border-radius: var(--rg-r) !important;
+  color: var(--rg-ink);
+}
+
+:root body[class][class] #downloadBtn {
+  background: linear-gradient(180deg, #5fb0ff 0%, #0a84ff 100%) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 999px !important;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.1px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 10px 26px rgba(10, 132, 255, 0.4) !important;
+  transition:
+    transform 0.15s ease,
+    filter 0.2s ease;
+}
+#downloadBtn:hover {
+  filter: brightness(1.06);
+}
+#downloadBtn:active {
+  transform: scale(0.98);
+}
+:root body[class][class] #downloadBtn.is-cancelling {
+  background: rgba(255, 69, 58, 0.18) !important;
+  color: #ff453a !important;
+  border-color: rgba(255, 69, 58, 0.45) !important;
+  box-shadow: none !important;
+}
+
+.dl-all-btn,
+.pdf-btn,
+#redownloadBtn,
+#batchDownloadAllBtn,
+.done-btn {
+  border-radius: var(--rg-r) !important;
+}
+
+.section-label {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--rg-ink-2);
+}
+.chip {
+  background: var(--rg-fill-inner);
+  border-radius: 999px;
+  box-shadow: inset 0 1px 0 var(--rg-hl);
+}
+
+.progress-container {
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-bar {
+  background: linear-gradient(90deg, #55adff, #0a84ff) !important;
+  border-radius: 999px;
+}
+
+/* ---------- Floating tab bar ---------- */
+:root body[class][class] .bottom-nav {
+  left: 16px !important;
+  right: 16px !important;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+  width: auto !important;
+  max-width: 440px !important;
+  margin: 0 auto !important;
+  padding: 7px !important;
+  gap: 4px;
+  background:
+    linear-gradient(160deg, var(--rg-sheen), transparent 55%), var(--rg-fill) !important;
+  -webkit-backdrop-filter: blur(calc(var(--rg-blur) + 8px)) saturate(190%) !important;
+  backdrop-filter: blur(calc(var(--rg-blur) + 8px)) saturate(190%) !important;
+  border: 1px solid var(--rg-line) !important;
+  border-radius: 34px !important;
+  box-shadow:
+    inset 0 1px 0 var(--rg-hl),
+    0 16px 40px rgba(var(--rg-shadow-rgb), 0.28) !important;
+}
+.nav-item {
+  gap: 3px;
+  padding: 8px 0;
+  border-radius: 26px;
+  color: var(--rg-ink-2);
+}
+.nav-item span {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.66rem;
+  font-weight: 600;
+}
+.nav-item.active {
+  color: var(--rg-accent);
+  background: var(--rg-fill-2);
+  box-shadow:
+    inset 0 1px 0 var(--rg-hl),
+    0 4px 14px rgba(var(--rg-shadow-rgb), 0.14);
+}
+.nav-item.active svg {
+  color: var(--rg-accent);
+  transform: none;
+}
+.app-container {
+  padding-bottom: calc(128px + env(safe-area-inset-bottom));
+}
+.custom-toast {
+  bottom: calc(112px + env(safe-area-inset-bottom, 0px));
+  border-radius: 999px !important;
+}
+.download-bubble-container {
+  bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+}
+:root body[class][class] .download-bubble-btn {
+  background:
+    linear-gradient(155deg, var(--rg-sheen), transparent 55%), var(--rg-fill);
+  -webkit-backdrop-filter: blur(var(--rg-blur)) saturate(var(--rg-sat));
+  backdrop-filter: blur(var(--rg-blur)) saturate(var(--rg-sat));
+  box-shadow:
+    inset 0 1px 0 var(--rg-hl),
+    0 8px 22px rgba(var(--rg-shadow-rgb), 0.25);
+}
+
+/* ---------- Toggle (iOS switch) ---------- */
+.toggle-switch {
+  width: 51px;
+  height: 31px;
+}
+.toggle-switch label {
+  background-color: rgba(120, 120, 140, 0.34);
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px var(--rg-hair);
+}
+.toggle-switch label:before {
+  height: 27px;
+  width: 27px;
+  left: 2px;
+  bottom: 2px;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.28);
+}
+.toggle-switch input:checked + label {
+  background-color: #34c759;
+}
+.toggle-switch input:checked + label:before {
+  transform: translateX(20px);
+}
+
+/* ---------- Dropdowns ---------- */
+:root body[class][class] .dropdown-menu {
+  background: var(--rg-menu-fill) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
+  backdrop-filter: blur(30px) saturate(190%) !important;
+  border: 1px solid var(--rg-line) !important;
+  border-radius: var(--rg-r) !important;
+  box-shadow:
+    inset 0 1px 0 var(--rg-hl),
+    0 18px 44px rgba(var(--rg-shadow-rgb), 0.3) !important;
+}
+.dropdown-item:hover,
+[data-theme="dark"] .dropdown-menu .dropdown-item:hover {
+  background: rgba(10, 132, 255, 0.14);
+}
+
+/* ---------- Sheets & dialogs ---------- */
+:root body[class][class] .modal-overlay {
+  background: var(--rg-scrim) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+}
+:root body[class][class] :is(
+    .modal-content,
+    .confirm-modal,
+    .quick-action-sheet,
+    .action-sheet,
+    .guide-modal,
+    .pin-modal
+  ) {
+  background:
+    linear-gradient(155deg, var(--rg-sheen), transparent 40%), var(--rg-sheet-fill) !important;
+  -webkit-backdrop-filter: blur(36px) saturate(190%) !important;
+  backdrop-filter: blur(36px) saturate(190%) !important;
+  border: 1px solid var(--rg-line) !important;
+  border-radius: var(--rg-r-lg) !important;
+  box-shadow:
+    inset 0 1px 0 var(--rg-hl),
+    0 28px 70px rgba(var(--rg-shadow-rgb), 0.38) !important;
+}
+.confirm-body h2 {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.confirm-body p {
+  font-size: 0.85rem;
+}
+.confirm-actions {
+  border-top-color: var(--rg-hair) !important;
+}
+.confirm-actions button {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 15px 12px;
+  color: var(--rg-accent);
+}
+.confirm-actions .cancel-btn {
+  border-right-color: var(--rg-hair) !important;
+}
+.confirm-actions .ok-btn {
+  color: #ff453a;
+  font-weight: 700;
+}
+.confirm-actions .ok-btn.neutral-btn {
+  color: var(--rg-accent);
+}
+.confirm-actions button:hover,
+.confirm-actions button:active,
+.confirm-actions button:focus,
+.confirm-actions button:focus-visible {
+  background-color: rgba(10, 132, 255, 0.14) !important;
+  color: var(--rg-accent) !important;
+}
+.confirm-actions .ok-btn:hover,
+.confirm-actions .ok-btn:active {
+  color: #ff453a !important;
+  background-color: rgba(255, 69, 58, 0.14) !important;
+}
+
+/* ---------- Misc ---------- */
+.sub-page-header h3 {
+  letter-spacing: 0;
+  text-transform: none;
+}
+.skeleton-line,
+.skeleton-thumb {
+  background-color: var(--rg-hair);
+}
+:focus-visible {
+  outline: 2px solid var(--rg-accent);
+  outline-offset: 2px;
+}
+.bg-animation-canvas {
+  opacity: 0.55;
+}
+
+/* ---------- Polish: sheets keep a margin, guide buttons in sentence case ---------- */
+.modal-overlay {
+  padding: 16px;
+}
+.guide-actions button {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* ---------- Titles in sentence case, calmer labels ---------- */
+.page-header h2,
+.menu-title,
+.chip span,
+.sub-page-header h3,
+.modal-header h3,
+.history-stats-card .stats-label,
+.history-stats-card .stats-subtext,
+.stats-label,
+.path-label-sm,
+.dbd-title {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+.page-header h2 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em !important;
+}
+.menu-title {
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+.chip span {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+:root body[class][class] .empty-state {
+  background: var(--rg-fill-inner) !important;
+  border: 1px solid var(--rg-line) !important;
+  border-radius: var(--rg-r-lg) !important;
+  box-shadow: inset 0 1px 0 var(--rg-hl);
+  -webkit-backdrop-filter: blur(var(--rg-blur));
+  backdrop-filter: blur(var(--rg-blur));
+}
+
+.item-label,
+.item-label span,
+.settings-section-divider {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+.item-label span {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+/* Tab bar needs a denser tint so content scrolling under it stays legible */
+:root {
+  --rg-nav-fill: rgba(255, 255, 255, 0.62);
+}
+[data-theme="dark"] {
+  --rg-nav-fill: rgba(18, 22, 54, 0.62);
+}
+:root body[class][class] .bottom-nav {
+  background:
+    linear-gradient(160deg, var(--rg-sheen), transparent 55%), var(--rg-nav-fill) !important;
+}

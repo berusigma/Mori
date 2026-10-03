@@ -1,4 +1,4 @@
-/* Home Page — iPhone Liquid Glass Edition */
+/* Home Page (Input, Actions, Media Cards, Platform Chips) */
 
 .input-section {
   display: flex;
@@ -14,128 +14,79 @@
 
 input[type="text"] {
   width: 100%;
-  padding: 18px 88px 18px 52px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(18px) saturate(170%);
-  -webkit-backdrop-filter: blur(18px) saturate(170%);
-  border: 1px solid var(--glass-border);
-  border-radius: 28px;
+  padding: 16px 80px 16px 48px;
+  background-color: var(--surface);
+  border: 1px solid var(--rg-line);
+  border-radius: var(--radius-xl);
   color: var(--text-main);
-  font-size: 0.98rem;
-  font-weight: 500;
+  font-size: 1rem;
   outline: none;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  box-shadow: 
-    0 10px 28px -8px rgba(0, 0, 0, 0.15),
-    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.6);
   transition: var(--transition);
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .search-icon {
   position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 16px;
+  top: 16px;
+  transform: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1rem;
   pointer-events: none;
-  color: var(--primary);
-  opacity: 0.85;
+  opacity: 1;
+  filter: grayscale(1);
 }
 
 input[type="text"]:focus {
-  border-color: var(--primary);
-  box-shadow: 
-    0 16px 40px -8px rgba(99, 102, 241, 0.3),
-    0 0 0 4px rgba(99, 102, 241, 0.22),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
-  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(var(--rg-shadow-rgb), 0.18);
 }
 
 .input-action-btn {
   position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
+  right: 12px;
+  top: 16px;
+  transform: none;
+  background: none;
+  border: none;
   color: var(--text-main);
+  font-size: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(8px);
-  transition: var(--transition);
+  transition:
+    color 0.15s ease,
+    opacity 0.15s ease;
 }
 
 .input-action-btn:hover {
-  background: var(--primary);
-  color: #ffffff;
-  border-color: var(--primary);
-  transform: translateY(-50%) scale(1.08);
-}
-
-.input-action-btn:active {
-  transform: translateY(-50%) scale(0.92);
+  color: var(--primary);
 }
 
 #downloadBtn {
-  padding: 18px 24px;
-  background: var(--primary-gradient);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 28px;
-  font-size: 0.95rem;
-  font-weight: 700;
+  padding: 16px;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border: 1px solid var(--rg-line);
+  border-radius: var(--radius-xl);
+  font-size: 0.9rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 
-    0 14px 36px -6px rgba(99, 102, 241, 0.45),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.5);
   transition: var(--transition);
 }
 
-#downloadBtn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-  transform: skewX(-20deg);
-  transition: 0.6s ease;
-}
-
-#downloadBtn:hover::before {
-  left: 180%;
-}
-
 #downloadBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 
-    0 18px 44px -4px rgba(99, 102, 241, 0.55),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.7);
-}
-
-#downloadBtn:active {
-  transform: translateY(1px) scale(0.97);
-  box-shadow: 0 8px 20px -4px rgba(99, 102, 241, 0.4);
+  background-color: #333;
 }
 
 #loader {
-  margin-top: 32px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,14 +96,11 @@ input[type="text"]:focus {
 
 .skeleton-card {
   width: 100%;
-  background: var(--glass-bg);
-  backdrop-filter: blur(28px) saturate(190%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%);
-  border: 1px solid var(--glass-border);
-  border-radius: 28px;
+  background-color: var(--surface);
+  border: 1px solid var(--rg-line);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   margin-bottom: 20px;
-  box-shadow: var(--glass-shadow);
 }
 
 .skeleton-thumb {
@@ -160,9 +108,9 @@ input[type="text"]:focus {
   height: 200px;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.05) 25%,
-    rgba(255, 255, 255, 0.18) 50%,
-    rgba(255, 255, 255, 0.05) 75%
+    var(--surface) 25%,
+    var(--bg-color) 50%,
+    var(--surface) 75%
   );
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s infinite linear;
@@ -176,13 +124,13 @@ input[type="text"]:focus {
   height: 12px;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.05) 25%,
-    rgba(255, 255, 255, 0.18) 50%,
-    rgba(255, 255, 255, 0.05) 75%
+    var(--surface) 25%,
+    var(--bg-color) 50%,
+    var(--surface) 75%
   );
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s infinite linear;
-  border-radius: 6px;
+  border-radius: 4px;
   margin-bottom: 12px;
 }
 
@@ -206,18 +154,18 @@ input[type="text"]:focus {
 }
 
 #resultSection {
-  margin-top: 32px;
+  margin-top: 40px;
   animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(24px) scale(0.98);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
@@ -239,49 +187,38 @@ input[type="text"]:focus {
 }
 
 .settings-list {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  border-radius: 28px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--rg-line);
+  border-radius: var(--radius-l);
   position: relative;
   z-index: 10;
-  box-shadow: var(--glass-shadow);
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .media-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  border-radius: 28px;
+  background-color: var(--surface);
+  border: 1px solid var(--rg-line);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   position: relative;
-  box-shadow: var(--glass-shadow);
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .close-card {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 10px;
+  right: 10px;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  width: 36px;
-  height: 36px;
+  border: none;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: var(--transition);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(4px);
 }
 
 .close-card:hover {
@@ -292,7 +229,7 @@ input[type="text"]:focus {
 .thumbnail-wrapper {
   width: 100%;
   background-color: var(--surface);
-  border-bottom: 1px solid var(--primary);
+  border-bottom: 1px solid var(--rg-line);
   overflow: hidden;
   min-height: 200px;
   display: flex;
@@ -433,7 +370,7 @@ input[type="text"]:focus {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border-top: 1px solid var(--primary);
+  border-top: 1px solid var(--rg-line);
 }
 
 .progress-container {
@@ -625,7 +562,7 @@ input[type="text"]:focus {
   height: 60px;
   background: rgba(var(--primary-rgb), 0.2);
   backdrop-filter: blur(5px);
-  border: 1px solid var(--primary);
+  border: 1px solid var(--rg-line);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -752,12 +689,12 @@ body.mori-has-fullscreen {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
+  padding: 16px;
   border: none;
-  border-bottom: 1px solid var(--glass-border-subtle);
-  background: transparent;
+  border-bottom: 1px solid var(--rg-line);
+  background: none;
   color: var(--text-main);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-family: inherit;
   width: 100%;
   cursor: pointer;
@@ -769,8 +706,8 @@ body.mori-has-fullscreen {
 }
 
 .dl-item:hover {
-  background: rgba(99, 102, 241, 0.12);
-  transform: translateX(4px);
+  background-color: var(--surface);
+  filter: invert(0.05);
 }
 
 .dl-item:disabled {
@@ -781,14 +718,13 @@ body.mori-has-fullscreen {
 .dl-item span {
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 0.82rem;
-  letter-spacing: 0.5px;
+  font-size: 0.8rem;
 }
 
 .dl-item.dl-track-item {
   gap: 12px;
   text-align: left;
-  padding: 14px 20px;
+  padding: 12px 16px;
 }
 
 .dl-item .track-title {
@@ -806,43 +742,41 @@ body.mori-has-fullscreen {
 
 .dl-item .dl-badge {
   flex-shrink: 0;
-  padding: 6px 16px;
-  background: var(--primary-gradient);
-  color: #ffffff;
+  padding: 6px 14px;
+  background: var(--primary);
+  color: var(--on-primary);
   border-radius: 20px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-  transition: var(--transition);
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .dl-item.dl-track-item:hover .dl-badge {
-  transform: scale(1.08);
-  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.45);
+  transform: scale(1.05);
 }
 
 .dl-all-btn {
-  border-radius: 24px !important;
-  border: 1px solid var(--glass-border) !important;
-  margin-top: 14px;
-  margin-bottom: 10px;
-  background: var(--primary-gradient) !important;
-  color: #ffffff !important;
+  border-radius: var(--radius-l) !important;
+  border: 1px solid var(--rg-line) !important;
+  margin-top: 12px;
+  margin-bottom: 8px;
+  background-color: var(--primary) !important;
+  color: var(--on-primary) !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
+  padding: 14px 16px;
   width: 100%;
   cursor: pointer;
-  box-shadow: 0 8px 24px -4px rgba(99, 102, 241, 0.4);
   transition: var(--transition);
 }
 
 .dl-all-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px -4px rgba(99, 102, 241, 0.55);
+  filter: brightness(1.2);
 }
 
 .dl-all-btn:disabled {
@@ -852,18 +786,16 @@ body.mori-has-fullscreen {
 }
 
 .pdf-btn {
-  border-radius: 24px !important;
-  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-l) !important;
+  border: 1px solid var(--rg-line) !important;
   margin-top: 10px;
   margin-bottom: 14px;
-  background: var(--glass-bg) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+  background-color: var(--surface) !important;
   color: var(--text-main) !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
+  padding: 14px 16px;
   width: 100%;
   cursor: pointer;
   transition: var(--transition);
@@ -875,16 +807,14 @@ body.mori-has-fullscreen {
 }
 
 .pdf-btn:hover {
-  background: var(--primary-gradient) !important;
-  color: #ffffff !important;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px -4px rgba(99, 102, 241, 0.4);
+  background-color: var(--primary) !important;
+  color: var(--on-primary) !important;
 }
 
 .pdf-btn:hover .option-type,
 .pdf-btn:hover .option-size,
 .pdf-btn:hover svg {
-  color: #ffffff !important;
+  color: var(--on-primary) !important;
 }
 
 .pdf-btn .option-info {
@@ -936,20 +866,19 @@ body.mori-has-fullscreen {
 }
 
 .dl-all-badge {
-  background-color: #ffffff !important;
-  color: #6366f1 !important;
-  font-weight: 800 !important;
+  background-color: var(--on-primary) !important;
+  color: var(--primary) !important;
+  font-weight: 700 !important;
   font-size: 0.75rem !important;
-  padding: 5px 14px !important;
+  padding: 5px 12px !important;
   border-radius: 20px !important;
   letter-spacing: 0.5px !important;
   flex-shrink: 0;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .supported-section {
-  margin-top: 36px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -958,11 +887,11 @@ body.mori-has-fullscreen {
 
 .section-label {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   color: var(--text-secondary);
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 12px;
   padding-left: 4px;
 }
@@ -988,43 +917,40 @@ body.mori-has-fullscreen {
 .chip {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 18px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  transition: var(--transition);
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: var(--surface);
+  border: 1px solid var(--rg-line);
+  border-radius: 0;
+  transition: all 0.2s ease;
   width: 100%;
   justify-content: flex-start;
   cursor: pointer;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
-.chip:hover {
-  background: rgba(99, 102, 241, 0.14);
-  border-color: var(--primary);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px -6px rgba(99, 102, 241, 0.25);
+.chip:hover,
+.chip:active {
+  box-shadow: 0 8px 22px rgba(var(--rg-shadow-rgb), 0.18);
+  background-color: var(--surface);
+  color: var(--text-main);
 }
 
 .chip:active {
-  transform: translateY(1px) scale(0.97);
+  transform: translate(2px, 2px);
+  box-shadow: 0 8px 22px rgba(var(--rg-shadow-rgb), 0.18);
 }
 
 .chip span {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
   color: var(--text-main);
   transition: var(--transition);
 }
 
 .chip svg {
   transition: var(--transition);
-  color: var(--primary);
 }
 
 /* Batch Mode Styles */
@@ -1040,43 +966,35 @@ body.mori-has-fullscreen {
 .batch-url-textarea {
   width: 100%;
   min-height: 120px;
-  padding: 16px 80px 16px 20px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(28px) saturate(190%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%);
-  border: 1px solid var(--glass-border);
-  border-radius: 28px;
+  padding: 14px 76px 14px 16px;
+  background-color: var(--surface);
+  border: 1px solid var(--rg-line);
+  border-radius: var(--radius-xl);
   color: var(--text-main);
   font-family: inherit;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   line-height: 1.5;
   outline: none;
   resize: vertical;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4);
   transition: var(--transition);
 }
 
 .batch-url-textarea:focus {
-  border-color: var(--primary);
-  box-shadow: 
-    0 16px 40px -8px rgba(99, 102, 241, 0.3),
-    0 0 0 4px rgba(99, 102, 241, 0.22);
+  box-shadow: 0 8px 22px rgba(var(--rg-shadow-rgb), 0.18);
 }
 
 .batch-toggle-btn {
-  right: 50px !important;
+  right: 44px !important;
 }
 
 .batch-toggle-btn.active {
-  background: var(--primary);
-  color: #ffffff;
+  color: var(--primary);
   opacity: 1;
 }
 
 /* Download btn cancel state (single mode analyze phase) */
 #downloadBtn.is-cancelling {
-  background: rgba(239, 68, 68, 0.2) !important;
-  color: #ef4444 !important;
-  border-color: rgba(239, 68, 68, 0.4) !important;
+  background: rgba(231, 76, 60, 0.15) !important;
+  color: #e74c3c !important;
+  border-color: rgba(231, 76, 60, 0.4) !important;
 }
-

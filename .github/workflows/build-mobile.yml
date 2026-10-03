@@ -1,12 +1,18 @@
-name: Build Mobile Apps (Android APK & iPhone IPA)
+name: Build Mobile Release (Android & iOS)
 
 on:
   push:
     branches:
-      - master
       - main
+      - master
     tags:
       - 'v*'
+  pull_request:
+    branches:
+      - main
+      - master
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -16,16 +22,15 @@ jobs:
   build-android:
     name: Build Android APK
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Java JDK 21
+      - name: Setup Java JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '21'
+          java-version: '17'
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -42,18 +47,31 @@ jobs:
       - name: Build Android APK
         run: |
           VERSION=$(node -p "require('./package.json').version")
-          chmod +x android/gradlew
-          keytool -genkey -v -keystore android/app/release.keystore -alias mori -keyalg RSA -keysize 2048 -validity 10000 -storepass android123 -keypass android123 -dname "CN=Mori, OU=Mori, O=Mori, L=City, S=State, C=US"
-          cd android
-          ./gradlew assembleDebug assembleRelease
-          cd ..
           mkdir -p dist-assets
-          find android/app/build/outputs/apk -name "*.apk" -exec cp {} dist-assets/ \;
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease assembleDebug
+          cd ..
+          if [ -f "android/app/build/outputs/apk/release/Mori v${VERSION}.apk" ]; then
+            cp "android/app/build/outputs/apk/release/Mori v${VERSION}.apk" "dist-assets/Mori-v${VERSION}-Android-Release.apk"
+          elif [ -f "android/app/build/outputs/apk/release/app-release-unsigned.apk" ]; then
+            cp "android/app/build/outputs/apk/release/app-release-unsigned.apk" "dist-assets/Mori-v${VERSION}-Android-Release.apk"
+          else
+            find android/app/build/outputs/apk/release -name "*.apk" -exec cp {} "dist-assets/Mori-v${VERSION}-Android-Release.apk" \;
+          fi
+
+          if [ -f "android/app/build/outputs/apk/debug/Mori v${VERSION}.apk" ]; then
+            cp "android/app/build/outputs/apk/debug/Mori v${VERSION}.apk" "dist-assets/Mori-v${VERSION}-Android-Debug.apk"
+          elif [ -f "android/app/build/outputs/apk/debug/app-debug.apk" ]; then
+            cp "android/app/build/outputs/apk/debug/app-debug.apk" "dist-assets/Mori-v${VERSION}-Android-Debug.apk"
+          else
+            find android/app/build/outputs/apk/debug -name "*.apk" -exec cp {} "dist-assets/Mori-v${VERSION}-Android-Debug.apk" \;
+          fi
 
       - name: Upload Android Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Mori-Android-APK
+          name: Mori-Android-APKs
           path: dist-assets/*.apk
 
       - name: Upload Release Asset (Android)
@@ -65,9 +83,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-ios:
-    name: Build iPhone IPA
+    name: Build iOS IPA
     runs-on: macos-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -92,6 +109,7 @@ jobs:
           cp -r build/Mori.xcarchive/Products/Applications/App.app Payload/
           mkdir -p dist-assets
           zip -r "dist-assets/Mori-v${VERSION}-iOS-Unsigned.ipa" Payload
+          rm -rf Payload build
 
       - name: Upload iOS Artifact
         uses: actions/upload-artifact@v4

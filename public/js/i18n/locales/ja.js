@@ -1,6 +1,6 @@
 export default {
   "about-text":
-    "Moriは高速で多機能なメディアダウンローダーです。coflynによって愛を込めて作られました。",
+    "RYSAVは高速で多機能なメディアダウンローダーです。coflynによって愛を込めて作られました。",
   "anim-fast": "速い",
   "anim-normal": "普通",
   "anim-off": "オフ",
@@ -71,7 +71,7 @@ export default {
   "desc-clearcache":
     "スペースを解放するために一時データ（サムネイルなど）のみを削除します。ダウンロードしたファイルは安全です。続行しますか？",
   "desc-wipedata":
-    "警告：これにより、履歴とMoriフォルダ内のすべてのダウンロード済みファイルが完全に削除されます。ファイルを保持したい場合は、別のフォルダに移動してください。続行しますか？",
+    "警告：これにより、履歴とRYSAVフォルダ内のすべてのダウンロード済みファイルが完全に削除されます。ファイルを保持したい場合は、別のフォルダに移動してください。続行しますか？",
   "dl-stats-history": "履歴数",
   "dl-stats-total": "総ダウンロード数",
   "doh-cloudflare": "Cloudflare (1.1.1.1)",
@@ -110,11 +110,11 @@ export default {
   "history-unlimited": "無制限",
   "howtouse-steps": [
     "サポートされているプラットフォームからリンクをコピーします。",
-    "Moriに戻り、貼り付けボタンをタップします。",
+    "RYSAVに戻り、貼り付けボタンをタップします。",
     "分析が完了するまで待ちます。",
     "ダウンロードをタップして保存します。",
   ],
-  "label-about": "Moriについて",
+  "label-about": "RYSAVについて",
   "label-anim-speed": "アニメーション速度",
   "label-animated-bg": "動く背景",
   "label-auto-analyze": "貼り付け時に自動解析",
@@ -198,7 +198,7 @@ export default {
   "label-share-file": "ファイルを共有",
   "label-share-link": "リンクを共有",
   "label-share-media": "メディアを共有",
-  "label-shareapp": "Moriをシェアする",
+  "label-shareapp": "RYSAVをシェアする",
   "label-sound-pack": "完了サウンド",
   "label-speed": "速度",
   "label-storagesize": "合計メディアサイズ",
@@ -321,7 +321,7 @@ export default {
   "share-msg":
     "どこからでもメディアをダウンロードできる素晴らしいアプリ、Moriをチェックしてください！ https://github.com/coflyn/Mori",
   "share-panel-sub": "メディアの設定とダウンロード",
-  "share-panel-title": "Mori クイック保存",
+  "share-panel-title": "RYSAV クイック保存",
   "sound-chime": "モダンチャイム",
   "sound-droplet": "水滴",
   "sound-pop": "ソフトポップ",

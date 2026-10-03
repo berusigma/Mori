@@ -9,11 +9,8 @@ let width = window.innerWidth;
 let height = window.innerHeight;
 let dpr = window.devicePixelRatio || 1;
 
-let isEnabled =
-  localStorage.getItem("mori_bg_animated") === null
-    ? true
-    : localStorage.getItem("mori_bg_animated") === "true";
-let currentShape = localStorage.getItem("mori_bg_shape") || "bubbles";
+let isEnabled = localStorage.getItem("mori_bg_animated") === "true";
+let currentShape = localStorage.getItem("mori_bg_shape") || "stars";
 let currentBrightness = parseInt(
   localStorage.getItem("mori_bg_brightness") || "150",
   10,
@@ -157,26 +154,38 @@ class Bubble {
   draw(colorRGB, brightnessFactor) {
     const a = this.alpha * brightnessFactor;
 
-    // Outer Glass Bubble Ring
+    // Outer Bubble Ring
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.strokeStyle = `rgba(${colorRGB}, ${a * 0.6})`;
-    ctx.lineWidth = 1.4;
-    ctx.fillStyle = `rgba(${colorRGB}, ${a * 0.08})`;
-    ctx.fill();
+    ctx.strokeStyle = `rgba(${colorRGB}, ${a * 0.75})`;
+    ctx.lineWidth = 1.6;
     ctx.stroke();
+
+    // Subtle Glass Gradient Fill
+    const grad = ctx.createRadialGradient(
+      this.x - this.radius * 0.3,
+      this.y - this.radius * 0.3,
+      1,
+      this.x,
+      this.y,
+      this.radius,
+    );
+    grad.addColorStop(0, `rgba(${colorRGB}, ${a * 0.25})`);
+    grad.addColorStop(0.8, `rgba(${colorRGB}, ${a * 0.05})`);
+    grad.addColorStop(1, `rgba(${colorRGB}, 0)`);
+    ctx.fillStyle = grad;
+    ctx.fill();
 
     // Specular Light Highlight on top-left
     ctx.beginPath();
     ctx.arc(
-      this.x - this.radius * 0.35,
-      this.y - this.radius * 0.35,
-      Math.max(1, this.radius * 0.22),
+      this.x - this.radius * 0.38,
+      this.y - this.radius * 0.38,
+      this.radius * 0.25,
       0,
       Math.PI * 2,
     );
-    ctx.fillStyle = `rgba(${colorRGB}, ${a * 0.8})`;
-    ctx.fill();
+    ctx.fillStyle = `rgba(${colorRGB}, ${a * 0.85})`;
     ctx.fill();
   }
 }
@@ -567,13 +576,13 @@ function initElements() {
 
   // Optimal counts based on screen area to guarantee smooth 60fps
   const area = (width * height) / 10000;
-  const starCount = Math.max(20, Math.min(35, Math.floor(area * 0.7)));
-  const bubbleCount = Math.max(16, Math.min(26, Math.floor(area * 0.5)));
-  const orbCount = Math.max(10, Math.min(18, Math.floor(area * 0.35)));
-  const sakuraCount = Math.max(18, Math.min(30, Math.floor(area * 0.5)));
-  const rainCount = Math.max(25, Math.min(45, Math.floor(area * 0.8)));
-  const snowCount = Math.max(22, Math.min(40, Math.floor(area * 0.7)));
-  const fireflyCount = Math.max(14, Math.min(24, Math.floor(area * 0.45)));
+  const starCount = Math.max(35, Math.min(65, Math.floor(area * 1.2)));
+  const bubbleCount = Math.max(25, Math.min(45, Math.floor(area * 0.9)));
+  const orbCount = Math.max(16, Math.min(28, Math.floor(area * 0.55)));
+  const sakuraCount = Math.max(30, Math.min(55, Math.floor(area * 0.95)));
+  const rainCount = Math.max(45, Math.min(75, Math.floor(area * 1.3)));
+  const snowCount = Math.max(40, Math.min(70, Math.floor(area * 1.15)));
+  const fireflyCount = Math.max(22, Math.min(38, Math.floor(area * 0.75)));
 
   if (currentShape === "stars") {
     for (let i = 0; i < starCount; i++) {

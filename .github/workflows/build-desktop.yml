@@ -3,10 +3,16 @@ name: Build Desktop Release (Windows & macOS)
 on:
   push:
     branches:
-      - master
       - main
+      - master
     tags:
-      - 'v*'
+      - "v*"
+  pull_request:
+    branches:
+      - main
+      - master
+  release:
+    types: [published]
   workflow_dispatch:
 
 jobs:
@@ -71,7 +77,7 @@ jobs:
           find src-tauri/target/release/bundle/nsis -name "*.exe" -exec cp {} "dist-assets/Mori-v${VERSION}-Windows-x64-Setup.exe" \;
           find src-tauri/target/release/bundle/msi -name "*.msi" -exec cp {} "dist-assets/Mori-v${VERSION}-Windows-x64.msi" \;
 
-      - name: Upload Artifacts
+      - name: Upload Desktop Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Mori-Desktop-${{ matrix.platform }}

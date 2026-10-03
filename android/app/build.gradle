@@ -48,14 +48,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             if (file('release.keystore').exists()) {
                 signingConfig signingConfigs.release
-            } else {
-                signingConfig signingConfigs.debug
             }
         }
     }
     applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "Mori-v${variant.versionName}-${variant.buildType.name}.apk"
+            outputFileName = "Mori v${variant.versionName}.apk"
         }
     }
 }

@@ -1,4 +1,4 @@
-/* Mori — Master Stylesheet */
+/* RYSAV — Master Stylesheet */
 
 @import "./variables.css";
 @import "./base.css";
@@ -8,3 +8,4 @@
 @import "./settings.css";
 @import "./modals.css";
 @import "./rtl.css";
+@import "./rysav.css";
