@@ -58,6 +58,7 @@ import "./modules/modals.js";
 import "./modules/update.js";
 import "./modules/intents.js";
 import "./modules/download.js";
+import { initToolsModule } from "./modules/tools.js";
 import "./ui/downloadBubble.js";
 import { initBgAnimation } from "./modules/bgAnimation.js";
 
@@ -189,7 +190,8 @@ window.addEventListener("mori_download_started", refreshHistoryIfVisible);
 window.addEventListener("mori_download_ended", refreshHistoryIfVisible);
 window.addEventListener("mori_download_cancelled", refreshHistoryIfVisible);
 
-const pages = ["home", "history", "settings"];
+const pages = ["home", "tools", "history", "settings"];
+initToolsModule();
 
 async function switchPage(pageId) {
   const isPrivacyOn = localStorage.getItem("mori_privacy_lock") === "true";

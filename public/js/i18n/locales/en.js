@@ -252,6 +252,8 @@ export default {
   "nav-history": "History",
   "nav-home": "Home",
   "nav-settings": "Settings",
+  "nav-tools": "Tools",
+  "tools-desc": "Download utilities & media tools collection",
   "notif-all-downloaded": "All ${total} items successfully downloaded.",
   "overwrite-overwrite": "Overwrite Existing",
   "overwrite-rename": "Auto-Rename (e.g. _1, _2)",
