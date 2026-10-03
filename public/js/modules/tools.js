@@ -1,17 +1,71 @@
-// tools.js — Tools & Utilities Module for Mori / RYSAV
+// tools.js — Tools & Utilities Sub-View System & Navigation Manager
 
 import { showToast, triggerHaptic } from "../utils/index.js";
+import { initPresetAMFinder } from "./toolsPresetAM.js";
+import { initImageUpscalingTool } from "./toolsImageUpscale.js";
+import { initRemoveBGTool } from "./toolsRemoveBG.js";
+import { initCompressPDFTool } from "./toolsCompressPDF.js";
 
 export function initToolsModule() {
+  initToolsViewSwitcher();
   initToolsCategoryFilter();
   initBulkLinkExtractor();
   initQrCodeGenerator();
   initCodecTools();
   initSizeEstimator();
   initPingTester();
+
+  // Sub-modules
+  initPresetAMFinder();
+  initImageUpscalingTool();
+  initRemoveBGTool();
+  initCompressPDFTool();
 }
 
-/* 1. Category Filter */
+/* 1. Tools Sub-View Switcher */
+function initToolsViewSwitcher() {
+  const listView = document.getElementById("toolsListView");
+  const subViews = document.querySelectorAll(".tool-subview");
+  const openBtns = document.querySelectorAll("[data-open-tool]");
+  const backBtns = document.querySelectorAll(".back-to-tools-btn");
+
+  if (!listView) return;
+
+  const showSubView = (toolId) => {
+    triggerHaptic("light");
+    const targetSubView = document.getElementById(`toolView_${toolId}`);
+
+    subViews.forEach((sv) => sv.classList.add("hidden"));
+    if (listView) listView.classList.add("hidden");
+
+    if (targetSubView) {
+      targetSubView.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const showListView = () => {
+    triggerHaptic("light");
+    subViews.forEach((sv) => sv.classList.add("hidden"));
+    if (listView) listView.classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  openBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const toolId = btn.getAttribute("data-open-tool");
+      if (toolId) showSubView(toolId);
+    });
+  });
+
+  backBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      showListView();
+    });
+  });
+}
+
+/* 2. Category Filter */
 function initToolsCategoryFilter() {
   const catBtns = document.querySelectorAll(".tools-cat-btn");
   const toolCards = document.querySelectorAll(".tools-card");
@@ -27,7 +81,7 @@ function initToolsCategoryFilter() {
       toolCards.forEach((card) => {
         const cardCat = card.getAttribute("data-cat");
         if (targetCat === "all" || cardCat === targetCat) {
-          card.style.display = "block";
+          card.style.display = "flex";
           setTimeout(() => {
             card.style.opacity = "1";
             card.style.transform = "translateY(0)";
@@ -44,7 +98,7 @@ function initToolsCategoryFilter() {
   });
 }
 
-/* 2. Bulk Link Extractor */
+/* 3. Bulk Link Extractor */
 function initBulkLinkExtractor() {
   const input = document.getElementById("bulkLinkInput");
   const extractBtn = document.getElementById("extractLinksBtn");
@@ -64,7 +118,6 @@ function initBulkLinkExtractor() {
     const urlRegex = /(https?:\/\/[^\s<>"']+\.[^\s<>"']+)/gi;
     const matches = text.match(urlRegex) || [];
 
-    // Deduplicate
     currentExtractedLinks = Array.from(new Set(matches));
 
     if (currentExtractedLinks.length === 0) {
@@ -76,7 +129,7 @@ function initBulkLinkExtractor() {
     countSpan.textContent = `${currentExtractedLinks.length} link ditemukan`;
     linkList.innerHTML = "";
 
-    currentExtractedLinks.forEach((url, idx) => {
+    currentExtractedLinks.forEach((url) => {
       const item = document.createElement("div");
       item.className = "extracted-link-item";
 
@@ -100,14 +153,12 @@ function initBulkLinkExtractor() {
     resultBox.classList.remove("hidden");
     showToast(`Berhasil mengekstrak ${currentExtractedLinks.length} link!`);
 
-    // Attach listener for download buttons
     linkList.querySelectorAll(".download-link-btn").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         const targetUrl = e.currentTarget.getAttribute("data-url");
         const mainInput = document.getElementById("urlInput");
         if (mainInput && targetUrl) {
           mainInput.value = targetUrl;
-          // Switch to home page
           const homeNav = document.querySelector('.nav-item[data-page="home"]');
           if (homeNav) homeNav.click();
           showToast("Link dimasukkan ke form pengunduhan!");
@@ -142,7 +193,7 @@ function detectPlatformName(url) {
   return "Direct / Web";
 }
 
-/* 3. QR Code Generator */
+/* 4. QR Code Generator */
 function initQrCodeGenerator() {
   const qrInput = document.getElementById("qrInput");
   const generateBtn = document.getElementById("generateQrBtn");
@@ -193,7 +244,7 @@ function initQrCodeGenerator() {
   });
 }
 
-/* 4. Encoder / Decoder Tools */
+/* 5. Encoder / Decoder Tools */
 function initCodecTools() {
   const input = document.getElementById("codecInput");
   const output = document.getElementById("codecOutput");
@@ -246,7 +297,7 @@ function initCodecTools() {
   });
 }
 
-/* 5. Size Estimator */
+/* 6. Size Estimator */
 function initSizeEstimator() {
   const durationInput = document.getElementById("calcDuration");
   const qualitySelect = document.getElementById("calcQuality");
@@ -257,7 +308,7 @@ function initSizeEstimator() {
   if (!calcBtn) return;
 
   const qualityBitrates = {
-    "1080p": 6000, // kbps
+    "1080p": 6000,
     "720p": 3000,
     "480p": 1200,
     mp3_320: 320,
@@ -292,7 +343,7 @@ function initSizeEstimator() {
   });
 }
 
-/* 6. Ping Tester */
+/* 7. Ping Tester */
 function initPingTester() {
   const testBtn = document.getElementById("testPingBtn");
   const resultsGrid = document.getElementById("pingResults");
