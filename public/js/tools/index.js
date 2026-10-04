@@ -564,12 +564,27 @@ function renderAm(res, host) {
   <div class="tool-card-static">
     <h4>${esc(t("video"))}</h4>
     <div class="am-author">
-      <div class="am-avatar">${esc((a.nickname || a.uniqueId || "?").trim().charAt(0).toUpperCase())}</div>
+      <div class="am-avatar">
+        ${a.avatar ? `<img class="am-avatar-img" src="${esc(a.avatar)}" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='flex';" /><span class="am-avatar-initial" style="display:none;">${esc((a.nickname || a.uniqueId || "?").trim().charAt(0).toUpperCase())}</span>` : `<span class="am-avatar-initial">${esc((a.nickname || a.uniqueId || "?").trim().charAt(0).toUpperCase())}</span>`}
+      </div>
       <div>
         <div class="am-nick">${esc(a.nickname || a.uniqueId || "")}</div>
         <div class="am-handle">${a.uniqueId ? "@" + esc(a.uniqueId) : ""}${posted ? ` · ${esc(t("posted"))} ${esc(posted)}` : ""}</div>
       </div>
     </div>
+    ${v.id || v.playUrl || v.cover ? `
+    <div class="am-video-preview-box">
+      ${v.playUrl ? `
+        <video class="am-video-player" controls preload="metadata" poster="${esc(v.cover || '')}" referrerpolicy="no-referrer">
+          <source src="${esc(v.playUrl)}" type="video/mp4">
+        </video>
+      ` : (v.id ? `
+        <iframe class="am-tiktok-iframe" src="https://www.tiktok.com/embed/v2/${esc(v.id)}" title="TikTok Video Preview" allowfullscreen frameborder="0" loading="lazy"></iframe>
+      ` : `
+        <img class="am-video-cover-img" src="${esc(v.cover)}" alt="" referrerpolicy="no-referrer" />
+      `)}
+    </div>
+    ` : ""}
     ${v.description ? `<p class="am-desc">${esc(v.description)}</p>` : ""}
     <div class="am-stats">${stat(t("views"), st.views)}${stat(t("likes"), st.likes)}${stat(t("comments"), st.comments)}${stat(t("shares"), st.shares)}</div>
     ${a.bio ? `<p class="am-bio">${esc(a.bio)}</p>` : ""}

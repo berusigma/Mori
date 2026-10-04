@@ -227,6 +227,9 @@ async function getVideoInfo(videoId, attempts = 2) {
     const node = key ? st.source.data[key] : null;
     const v = node?.videoData;
     if (!v) return { error: `video tidak tersedia (code ${node?.customErrorCode ?? "?"})` };
+    const avatar = v.authorInfos?.avatarLarger || v.authorInfos?.avatarMedium || v.authorInfos?.avatarThumb || v.authorInfos?.avatar_thumb || null;
+    const cover = v.itemInfos?.cover?.[0] || (typeof v.itemInfos?.cover === "string" ? v.itemInfos?.cover : null) || v.itemInfos?.covers?.[0] || null;
+    const playUrl = v.itemInfos?.video?.urls?.[0] || v.itemInfos?.videoUrl || null;
     return {
       id: v.itemInfos?.id || videoId,
       description: v.itemInfos?.text || "",
@@ -235,11 +238,14 @@ async function getVideoInfo(videoId, attempts = 2) {
       diggCount: v.itemInfos?.diggCount ?? null,
       playCount: v.itemInfos?.playCount ?? null,
       shareCount: v.itemInfos?.shareCount ?? null,
+      cover,
+      playUrl,
       author: {
         uniqueId: v.authorInfos?.uniqueId || "",
         nickname: v.authorInfos?.nickName || "",
         bio: v.authorInfos?.signature || "",
         secUid: v.authorInfos?.secUid || "",
+        avatar,
       },
     };
   }
@@ -252,6 +258,7 @@ async function getProfile(uniqueId) {
     const { text: body = "" } = await getText(`https://www.tiktok.com/@${uniqueId}`);
     const uni = parseJsonScript(body, "__UNIVERSAL_DATA_FOR_REHYDRATION__");
     const user = uni?.__DEFAULT_SCOPE__?.["webapp.user-detail"]?.userInfo?.user || {};
+    const avatar = user.avatarLarger || user.avatarMedium || user.avatarThumb || user.avatar_medium || null;
     let bioLink = null;
     const bm = body.match(/"bioLink":\{"link":"([^"]+)"/);
     if (bm) bioLink = bm[1].replace(/\\u002F/g, "/");
@@ -261,6 +268,7 @@ async function getProfile(uniqueId) {
     return {
       bio: user.signature || "",
       nickname: user.nickname || "",
+      avatar,
       bioLink,
       links: [...new Set([...(bioLink ? [bioLink] : []), ...links])],
     };
@@ -497,7 +505,7 @@ async function harvestLinktree(url) {
 
 /* ---------- cache (localStorage) ---------- */
 const CACHE_KEY = "rysav_am_cache";
-const CACHE_VER = "v2";
+const CACHE_VER = "v3";
 const CACHE_MAX = 80;
 const TTL_FOUND = 86400;
 const TTL_EMPTY = 3600;
@@ -789,6 +797,8 @@ export async function findPresets(rawInput, { onLog = () => {}, noCache = false 
     video: {
       id: videoId,
       url: videoUrl,
+      cover: info.cover || null,
+      playUrl: info.playUrl || null,
       description: info.description || "",
       createTime: info.createTime || null,
       stats: {
@@ -802,6 +812,7 @@ export async function findPresets(rawInput, { onLog = () => {}, noCache = false 
       uniqueId,
       nickname: info.author?.nickname || profile.nickname || "",
       bio: info.author?.bio || profile.bio || "",
+      avatar: info.author?.avatar || profile.avatar || null,
       bioLink: profile.bioLink || null,
     },
     scanned: {
