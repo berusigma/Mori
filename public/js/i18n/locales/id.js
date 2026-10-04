@@ -252,8 +252,6 @@ export default {
   "nav-history": "Riwayat",
   "nav-home": "Beranda",
   "nav-settings": "Pengaturan",
-  "nav-tools": "Tools",
-  "tools-desc": "Kumpulan alat bantu pengunduhan & pemroses media",
   "notif-all-downloaded": "Semua ${total} item berhasil diunduh.",
   "overwrite-overwrite": "Timpa File Lama",
   "overwrite-rename": "Ganti Nama Otomatis",

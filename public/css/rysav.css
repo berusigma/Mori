@@ -607,3 +607,7 @@ textarea::placeholder {
   background:
     linear-gradient(160deg, var(--rg-sheen), transparent 55%), var(--rg-nav-fill) !important;
 }
+
+.custom-toast {
+  overflow-wrap: anywhere;
+}

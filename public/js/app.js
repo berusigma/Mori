@@ -58,7 +58,7 @@ import "./modules/modals.js";
 import "./modules/update.js";
 import "./modules/intents.js";
 import "./modules/download.js";
-import { initToolsModule } from "./modules/tools.js";
+import { initTools, resetToolsMenu, closeActiveTool } from "./tools/index.js";
 import "./ui/downloadBubble.js";
 import { initBgAnimation } from "./modules/bgAnimation.js";
 
@@ -190,8 +190,7 @@ window.addEventListener("mori_download_started", refreshHistoryIfVisible);
 window.addEventListener("mori_download_ended", refreshHistoryIfVisible);
 window.addEventListener("mori_download_cancelled", refreshHistoryIfVisible);
 
-const pages = ["home", "tools", "history", "settings"];
-initToolsModule();
+const pages = ["home", "history", "tools", "settings"];
 
 async function switchPage(pageId) {
   const isPrivacyOn = localStorage.getItem("mori_privacy_lock") === "true";
@@ -251,6 +250,9 @@ async function switchPage(pageId) {
 
   const targetPage = document.getElementById(targetPageId);
   if (targetPage) targetPage.classList.remove("hidden");
+
+  // Tools always opens on the list of tools
+  if (pageId === "tools") resetToolsMenu();
 
   // Reset settings to main menu when entering settings page
   if (pageId === "settings") {
@@ -315,6 +317,7 @@ document.addEventListener(
       target.closest(".media-slide") ||
       target.closest(".slider-wrapper") ||
       target.closest(".mori-player-container") ||
+      target.closest(".cmp") ||
       target.closest(".modal-overlay") ||
       target.closest(".history-item-actions") ||
       target.closest("input") ||
@@ -337,6 +340,8 @@ document.addEventListener(
   },
   { passive: true },
 );
+
+initTools();
 
 // Initial Auto-Download Check
 setTimeout(() => {
@@ -369,6 +374,8 @@ if (
       openModal.classList.add("hidden");
       return;
     }
+
+    if (closeActiveTool()) return;
 
     const activeSubPage = document.querySelector(
       ".settings-sub-page:not(.hidden)",
