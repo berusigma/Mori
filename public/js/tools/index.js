@@ -11,6 +11,7 @@ import {
 } from "./common.js";
 import { upscaleImage, compressPdf, removeBackground } from "./ilove.js";
 import { findPresets, clearAmCache } from "./amfinder.js";
+import { createVideoPlayer } from "../components/player.js";
 
 /* ---------------- strings (en / id; other languages fall back to en) ---------------- */
 const S = {
@@ -572,19 +573,7 @@ function renderAm(res, host) {
         <div class="am-handle">${a.uniqueId ? "@" + esc(a.uniqueId) : ""}${posted ? ` · ${esc(t("posted"))} ${esc(posted)}` : ""}</div>
       </div>
     </div>
-    ${v.id || v.playUrl || v.cover ? `
-    <div class="am-video-preview-box">
-      ${v.playUrl ? `
-        <video class="am-video-player" controls preload="metadata" poster="${esc(v.cover || '')}" referrerpolicy="no-referrer">
-          <source src="${esc(v.playUrl)}" type="video/mp4">
-        </video>
-      ` : (v.id ? `
-        <iframe class="am-tiktok-iframe" src="https://www.tiktok.com/embed/v2/${esc(v.id)}" title="TikTok Video Preview" allowfullscreen frameborder="0" loading="lazy"></iframe>
-      ` : `
-        <img class="am-video-cover-img" src="${esc(v.cover)}" alt="" referrerpolicy="no-referrer" />
-      `)}
-    </div>
-    ` : ""}
+    ${v.playUrl || res.videoUrl || v.cover ? `<div class="am-video-preview-box" id="amVideoContainer"></div>` : ""}
     ${v.description ? `<p class="am-desc">${esc(v.description)}</p>` : ""}
     <div class="am-stats">${stat(t("views"), st.views)}${stat(t("likes"), st.likes)}${stat(t("comments"), st.comments)}${stat(t("shares"), st.shares)}</div>
     ${a.bio ? `<p class="am-bio">${esc(a.bio)}</p>` : ""}
@@ -617,6 +606,25 @@ function renderAm(res, host) {
   }
   html += `</div>`;
   host.innerHTML = html;
+
+  const box = host.querySelector("#amVideoContainer");
+  if (box && (v.playUrl || res.videoUrl)) {
+    const player = createVideoPlayer(
+      {
+        url: v.playUrl || res.videoUrl,
+        title: v.description || a.nickname || "TikTok Video",
+        thumbnail: v.cover || "",
+        type: "video/mp4",
+      },
+      0,
+      v.cover || ""
+    );
+    box.appendChild(player);
+    if (typeof player._tryAutoPlay === "function") {
+      setTimeout(() => player._tryAutoPlay(), 120);
+    }
+  }
+}
 }
 
 function mountAm() {

@@ -204,8 +204,54 @@ function parseJsonScript(html, id) {
   }
 }
 
+async function getNoWatermarkVideo(videoId) {
+  try {
+    const q = new URLSearchParams({
+      aweme_id: String(videoId),
+      aid: "1180",
+      device_platform: "android",
+      version_code: "300000",
+    });
+    const res = await getText(`https://api16-normal-c-useast1a.tiktokv.com/aweme/v1/feed/?${q}`, {
+      accept: "application/json",
+      ua: REPLY_UA,
+      timeout: 7000,
+    });
+    if (res.text) {
+      const j = JSON.parse(res.text);
+      const aweme = j.aweme_list?.find((x) => String(x.aweme_id) === String(videoId)) || j.aweme_list?.[0];
+      if (aweme?.video) {
+        const playUrl = aweme.video.play_addr?.url_list?.[0] || aweme.video.download_addr?.url_list?.[0] || null;
+        const cover = aweme.video.origin_cover?.url_list?.[0] || aweme.video.cover?.url_list?.[0] || null;
+        const avatar = aweme.author?.avatar_medium?.url_list?.[0] || aweme.author?.avatar_thumb?.url_list?.[0] || null;
+        if (playUrl) return { playUrl, cover, avatar };
+      }
+    }
+  } catch (_) {}
+
+  try {
+    const res = await getText(`https://www.tikwm.com/api/?url=https://www.tiktok.com/video/${videoId}`, {
+      accept: "application/json",
+      timeout: 7000,
+    });
+    if (res.text) {
+      const j = JSON.parse(res.text);
+      if (j.code === 0 && j.data) {
+        const playUrl = j.data.play || j.data.hdplay || null;
+        const cover = j.data.origin_cover || j.data.cover || null;
+        const avatar = j.data.author?.avatar || null;
+        if (playUrl) return { playUrl, cover, avatar };
+      }
+    }
+  } catch (_) {}
+
+  return null;
+}
+
 async function getVideoInfo(videoId, attempts = 2) {
   let lastError = "embed gagal";
+  const nwm = await getNoWatermarkVideo(videoId);
+
   for (let i = 0; i < attempts; i++) {
     if (i) await sleep(700);
     let res;
@@ -226,27 +272,41 @@ async function getVideoInfo(videoId, attempts = 2) {
     const key = Object.keys(st.source?.data || {}).find((k) => k.includes(videoId));
     const node = key ? st.source.data[key] : null;
     const v = node?.videoData;
-    if (!v) return { error: `video tidak tersedia (code ${node?.customErrorCode ?? "?"})` };
-    const avatar = v.authorInfos?.avatarLarger || v.authorInfos?.avatarMedium || v.authorInfos?.avatarThumb || v.authorInfos?.avatar_thumb || null;
-    const cover = v.itemInfos?.cover?.[0] || (typeof v.itemInfos?.cover === "string" ? v.itemInfos?.cover : null) || v.itemInfos?.covers?.[0] || null;
-    const playUrl = v.itemInfos?.video?.urls?.[0] || v.itemInfos?.videoUrl || null;
+    if (!v && !nwm) return { error: `video tidak tersedia (code ${node?.customErrorCode ?? "?"})` };
+    const avatar = nwm?.avatar || v?.authorInfos?.avatarLarger || v?.authorInfos?.avatarMedium || v?.authorInfos?.avatarThumb || v?.authorInfos?.avatar_thumb || null;
+    const cover = nwm?.cover || v?.itemInfos?.cover?.[0] || (typeof v?.itemInfos?.cover === "string" ? v.itemInfos.cover : null) || v?.itemInfos?.covers?.[0] || null;
+    const playUrl = nwm?.playUrl || v?.itemInfos?.video?.urls?.[0] || v?.itemInfos?.videoUrl || null;
     return {
-      id: v.itemInfos?.id || videoId,
-      description: v.itemInfos?.text || "",
-      createTime: v.itemInfos?.createTime || null,
-      commentCount: v.itemInfos?.commentCount ?? null,
-      diggCount: v.itemInfos?.diggCount ?? null,
-      playCount: v.itemInfos?.playCount ?? null,
-      shareCount: v.itemInfos?.shareCount ?? null,
+      id: v?.itemInfos?.id || videoId,
+      description: v?.itemInfos?.text || "",
+      createTime: v?.itemInfos?.createTime || null,
+      commentCount: v?.itemInfos?.commentCount ?? null,
+      diggCount: v?.itemInfos?.diggCount ?? null,
+      playCount: v?.itemInfos?.playCount ?? null,
+      shareCount: v?.itemInfos?.shareCount ?? null,
       cover,
       playUrl,
       author: {
-        uniqueId: v.authorInfos?.uniqueId || "",
-        nickname: v.authorInfos?.nickName || "",
-        bio: v.authorInfos?.signature || "",
-        secUid: v.authorInfos?.secUid || "",
+        uniqueId: v?.authorInfos?.uniqueId || "",
+        nickname: v?.authorInfos?.nickName || "",
+        bio: v?.authorInfos?.signature || "",
+        secUid: v?.authorInfos?.secUid || "",
         avatar,
       },
+    };
+  }
+  if (nwm) {
+    return {
+      id: videoId,
+      description: "",
+      createTime: null,
+      commentCount: null,
+      diggCount: null,
+      playCount: null,
+      shareCount: null,
+      cover: nwm.cover,
+      playUrl: nwm.playUrl,
+      author: { uniqueId: "", nickname: "", bio: "", secUid: "", avatar: nwm.avatar },
     };
   }
   return { error: lastError };
@@ -505,7 +565,7 @@ async function harvestLinktree(url) {
 
 /* ---------- cache (localStorage) ---------- */
 const CACHE_KEY = "rysav_am_cache";
-const CACHE_VER = "v3";
+const CACHE_VER = "v4";
 const CACHE_MAX = 80;
 const TTL_FOUND = 86400;
 const TTL_EMPTY = 3600;
