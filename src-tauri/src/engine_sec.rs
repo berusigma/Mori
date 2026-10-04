@@ -1,5 +1,5 @@
 // Protected under GNU General Public License v3.0.
-// All rights reserved (C) 2026 coflyn.
+// All rights reserved (C) 2026 Ray.
 
 extern "C" {
     fn mori_get_engine_key(

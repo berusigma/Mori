@@ -1,6 +1,6 @@
 export default {
   "about-text":
-    "RYSAVは高速で多機能なメディアダウンローダーです。coflynによって愛を込めて作られました。",
+    "RYSAVは高速で多機能なメディアダウンローダーです。Rayによって愛を込めて作られました。",
   "anim-fast": "速い",
   "anim-normal": "普通",
   "anim-off": "オフ",
@@ -319,7 +319,7 @@ export default {
   "share-err-no-links": "ダウンロードリンクが見つかりませんでした。",
   "share-err-unsupported": "サポートされていないプラットフォームのリンクです。",
   "share-msg":
-    "どこからでもメディアをダウンロードできる素晴らしいアプリ、Moriをチェックしてください！ https://github.com/coflyn/Mori",
+    "どこからでもメディアをダウンロードできる素晴らしいアプリ、Moriをチェックしてください！ https://github.com/berusigma/Mori",
   "share-panel-sub": "メディアの設定とダウンロード",
   "share-panel-title": "RYSAV クイック保存",
   "sound-chime": "モダンチャイム",

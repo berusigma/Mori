@@ -1,5 +1,5 @@
 export default {
-  "about-text": "RYSAV एक तेज़ और बहुमुखी मीडिया डाउनलोडर है। coflyn द्वारा प्यार से बनाया गया।",
+  "about-text": "RYSAV एक तेज़ और बहुमुखी मीडिया डाउनलोडर है। Ray द्वारा प्यार से बनाया गया।",
   "anim-fast": "तेज़",
   "anim-normal": "सामान्य",
   "anim-off": "बंद",
@@ -292,7 +292,7 @@ export default {
   "share-err-failed": "लिंक को पार्स करने में विफल।",
   "share-err-no-links": "कोई डाउनलोड लिंक नहीं मिला।",
   "share-err-unsupported": "असमर्थित प्लेटफ़ॉर्म लिंक।",
-  "share-msg": "RYSAV आज़माएं, कहीं से भी मीडिया डाउनलोड करने के लिए एक शानदार ऐप! https://github.com/coflyn/Mori",
+  "share-msg": "RYSAV आज़माएं, कहीं से भी मीडिया डाउनलोड करने के लिए एक शानदार ऐप! https://github.com/berusigma/Mori",
   "share-panel-sub": "मीडिया कॉन्फ़िगर और डाउनलोड करें",
   "share-panel-title": "RYSAV त्वरित बचत",
   "sound-chime": "आधुनिक झंकार",

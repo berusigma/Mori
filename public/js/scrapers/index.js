@@ -1,5 +1,5 @@
 // Mori Scraper Engine Runtime Loader
-// GNU General Public License v3.0 — (C) 2026 coflyn.
+// GNU General Public License v3.0 — (C) 2026 Ray.
 
 import * as utils from "../utils/index.js";
 import * as urlUtils from "../utils/urlUtils.js";

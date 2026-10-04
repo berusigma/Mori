@@ -6,7 +6,7 @@ This guide covers everything you need to know about installing, sideloading, tro
 
 ## 📥 Download Official Binaries
 
-Always download official Mori release binaries directly from the **[GitHub Releases](https://github.com/coflyn/Mori/releases)** page.
+Always download official Mori release binaries directly from the **[GitHub Releases](https://github.com/berusigma/Mori/releases)** page.
 
 | Platform | Recommended Asset | Installation Method |
 | :--- | :--- | :--- |
@@ -121,6 +121,6 @@ Mori is **100% ad-free, open-source, and contains zero trackers or telemetry**.
 
 ---
 
-Developed with ❤️ by coflyn.  
-GitHub: https://github.com/coflyn  
-Instagram: @\_coflyn
+Developed with ❤️ by Ray.  
+GitHub: https://github.com/berusigma  
+TikTok: @Rayytampann

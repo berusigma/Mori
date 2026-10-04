@@ -161,7 +161,7 @@ shareAppBtn?.addEventListener("click", async () => {
     await Share.share({
       title: "Mori App",
       text: lang["share-msg"],
-      url: "https://github.com/coflyn/Mori",
+      url: "https://github.com/berusigma/Mori",
       dialogTitle: "Share Mori",
     });
   } else {
@@ -170,7 +170,7 @@ shareAppBtn?.addEventListener("click", async () => {
       navigator.share({
         title: "Mori App",
         text: lang["share-msg"],
-        url: "https://github.com/coflyn/Mori",
+        url: "https://github.com/berusigma/Mori",
       });
     } else {
       showToast(t("toast-share-not-supported"));

@@ -495,6 +495,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-Developed with ❤️ by coflyn.  
-GitHub: https://github.com/coflyn  
-Instagram: @\_coflyn
+Developed with ❤️ by Ray.  
+GitHub: https://github.com/berusigma  
+TikTok: @Rayytampann

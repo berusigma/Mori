@@ -32,7 +32,7 @@ Thank you for your interest in contributing to **Mori**! Whether you want to fix
 ## 💡 How Can I Contribute?
 
 ### 1. Reporting Bugs & Requesting Features
-* Check existing [GitHub Issues](https://github.com/coflyn/Mori/issues) before opening a new one to prevent duplicates.
+* Check existing [GitHub Issues](https://github.com/berusigma/Mori/issues) before opening a new one to prevent duplicates.
 * Clearly specify your **Platform & OS version** (Android / macOS / Windows / iOS), **Mori Version**, and the **Source URL** causing the error.
 
 ### 2. Translating & Localization (`public/js/i18n/`)
@@ -278,6 +278,6 @@ When modifying styles:
 
 ---
 
-Developed with ❤️ by coflyn.  
-GitHub: https://github.com/coflyn  
-Instagram: @\_coflyn
+Developed with ❤️ by Ray.  
+GitHub: https://github.com/berusigma  
+TikTok: @Rayytampann

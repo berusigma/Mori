@@ -1,5 +1,5 @@
 export default {
-  "about-text": "RYSAV adalah pengunduh media yang cepat dan serbaguna. Dibuat dengan cinta oleh coflyn.",
+  "about-text": "RYSAV adalah pengunduh media yang cepat dan serbaguna. Dibuat dengan cinta oleh Ray.",
   "anim-fast": "Cepat",
   "anim-normal": "Normal",
   "anim-off": "Mati",
@@ -296,7 +296,7 @@ export default {
   "share-err-failed": "Gagal memproses tautan.",
   "share-err-no-links": "Tidak ada tautan unduhan ditemukan.",
   "share-err-unsupported": "Tautan platform tidak didukung.",
-  "share-msg": "Cobain RYSAV, aplikasi keren untuk mengunduh media dari mana saja! https://github.com/coflyn/Mori",
+  "share-msg": "Cobain RYSAV, aplikasi keren untuk mengunduh media dari mana saja! https://github.com/berusigma/Mori",
   "share-panel-sub": "Konfigurasi & unduh media",
   "share-panel-title": "RYSAV Simpan Cepat",
   "sound-chime": "Modern Chime",

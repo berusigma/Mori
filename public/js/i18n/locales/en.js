@@ -1,5 +1,5 @@
 export default {
-  "about-text": "RYSAV is a fast and versatile media downloader. Built with love by coflyn.",
+  "about-text": "RYSAV is a fast and versatile media downloader. Built with love by Ray.",
   "anim-fast": "Fast",
   "anim-normal": "Normal",
   "anim-off": "Off",
@@ -296,7 +296,7 @@ export default {
   "share-err-failed": "Failed to parse link.",
   "share-err-no-links": "No download links found.",
   "share-err-unsupported": "Unsupported platform link.",
-  "share-msg": "Check out RYSAV, an awesome app to download media from anywhere! https://github.com/coflyn/Mori",
+  "share-msg": "Check out RYSAV, an awesome app to download media from anywhere! https://github.com/berusigma/Mori",
   "share-panel-sub": "Configure & download media",
   "share-panel-title": "RYSAV Quick Save",
   "sound-chime": "Modern Chime",

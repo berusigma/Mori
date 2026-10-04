@@ -7,9 +7,9 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Version-v4.4.0-brown?style=flat-square" alt="Version">
-  <img src="https://img.shields.io/github/downloads/coflyn/Mori/total?style=flat-square&color=blue" alt="Downloads">
-  <img src="https://img.shields.io/github/stars/coflyn/Mori?style=flat-square&color=gold" alt="Stars">
-  <img src="https://img.shields.io/github/repo-size/coflyn/Mori?style=flat-square&color=purple" alt="Repo Size">
+  <img src="https://img.shields.io/github/downloads/berusigma/Mori/total?style=flat-square&color=blue" alt="Downloads">
+  <img src="https://img.shields.io/github/stars/berusigma/Mori?style=flat-square&color=gold" alt="Stars">
+  <img src="https://img.shields.io/github/repo-size/berusigma/Mori?style=flat-square&color=purple" alt="Repo Size">
   <img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=flat-square" alt="License">
   <img src="https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20macOS%20%7C%20Windows-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Platform">
 </p>
@@ -18,7 +18,7 @@
 
 Save and download videos, photos, and music from 16 platforms. No watermarks. No accounts. No tracking. Everything stays on your device.
 
-<a href="https://sociabuzz.com/coflyn/tribe" target="_blank">
+<a href="https://sociabuzz.com/Ray/tribe" target="_blank">
   <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="60" />
 </a>
 
@@ -63,7 +63,7 @@ Saving media with Mori takes only three simple steps:
 
 ## 📥 Download & Installation
 
-Pre-compiled, ready-to-use packages are available for all devices on **[GitHub Releases](https://github.com/coflyn/Mori/releases)**.
+Pre-compiled, ready-to-use packages are available for all devices on **[GitHub Releases](https://github.com/berusigma/Mori/releases)**.
 
 | Platform                                                                                                                        | Available Packages                                                | Installation Guide                                                                  |
 | :------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
@@ -260,6 +260,6 @@ Mori is free and open-source software licensed under the **[GNU General Public L
 
 ---
 
-Developed with ❤️ by coflyn.  
-GitHub: https://github.com/coflyn  
-Instagram: @\_coflyn
+Developed with ❤️ by Ray.  
+GitHub: https://github.com/berusigma  
+TikTok: @Rayytampann

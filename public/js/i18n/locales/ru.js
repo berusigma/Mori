@@ -1,5 +1,5 @@
 export default {
-  "about-text": "RYSAV — быстрый и универсальный загрузчик медиа. Сделано с любовью от coflyn.",
+  "about-text": "RYSAV — быстрый и универсальный загрузчик медиа. Сделано с любовью от Ray.",
   "anim-fast": "Быстро",
   "anim-normal": "Нормально",
   "anim-off": "Выкл",
@@ -292,7 +292,7 @@ export default {
   "share-err-failed": "Не удалось разобрать ссылку.",
   "share-err-no-links": "Ссылки для скачивания не найдены.",
   "share-err-unsupported": "Неподдерживаемая ссылка платформы.",
-  "share-msg": "Попробуйте RYSAV — классное приложение для загрузки медиа откуда угодно! https://github.com/coflyn/Mori",
+  "share-msg": "Попробуйте RYSAV — классное приложение для загрузки медиа откуда угодно! https://github.com/berusigma/Mori",
   "share-panel-sub": "Настройка и загрузка медиа",
   "share-panel-title": "RYSAV Быстрое сохранение",
   "sound-chime": "Колокольчик",

@@ -1,5 +1,5 @@
 export default {
-  "about-text": "RYSAV هو أداة تحميل وسائط سريعة ومتعددة الاستخدامات. صُنع بكل حب بواسطة coflyn.",
+  "about-text": "RYSAV هو أداة تحميل وسائط سريعة ومتعددة الاستخدامات. صُنع بكل حب بواسطة Ray.",
   "anim-fast": "سريع",
   "anim-normal": "عادي",
   "anim-off": "إيقاف",
@@ -292,7 +292,7 @@ export default {
   "share-err-failed": "فشل في تحليل الرابط.",
   "share-err-no-links": "لم يتم العثور على روابط تحميل.",
   "share-err-unsupported": "رابط منصة غير مدعوم.",
-  "share-msg": "جرب تطبيق RYSAV الرائع لتحميل الوسائط من أي مكان! https://github.com/coflyn/Mori",
+  "share-msg": "جرب تطبيق RYSAV الرائع لتحميل الوسائط من أي مكان! https://github.com/berusigma/Mori",
   "share-panel-sub": "إعداد وتحميل الوسائط",
   "share-panel-title": "حفظ سريع RYSAV",
   "sound-chime": "رنين حديث",

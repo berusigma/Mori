@@ -1,5 +1,5 @@
 export default {
-  "about-text": "Ang RYSAV ay isang mabilis at versatile na media downloader. Ginawa nang may pagmamahal ni coflyn.",
+  "about-text": "Ang RYSAV ay isang mabilis at versatile na media downloader. Ginawa nang may pagmamahal ni Ray.",
   "anim-fast": "Mabilis",
   "anim-normal": "Normal",
   "anim-off": "Naka-off",
@@ -292,7 +292,7 @@ export default {
   "share-err-failed": "Nabigong i-parse ang link.",
   "share-err-no-links": "Walang nahanap na download link.",
   "share-err-unsupported": "Hindi suportadong link ng platform.",
-  "share-msg": "Subukan ang RYSAV, isang kahanga-hangang app para mag-download ng media mula sa kahit saan! https://github.com/coflyn/Mori",
+  "share-msg": "Subukan ang RYSAV, isang kahanga-hangang app para mag-download ng media mula sa kahit saan! https://github.com/berusigma/Mori",
   "share-panel-sub": "I-configure at i-download ang media",
   "share-panel-title": "RYSAV Mabilisang Pag-save",
   "sound-chime": "Modernong Chime",
