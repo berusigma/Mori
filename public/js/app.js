@@ -271,19 +271,24 @@ async function switchPage(pageId) {
   }
 }
 
+window.switchPage = switchPage;
 setTimeout(refreshAllVideoThumbnails, 5000);
 
-// Global Event Delegation for Navigation Items
-document.addEventListener("click", (e) => {
-  const navItem = e.target.closest(".nav-item");
-  if (navItem) {
-    e.preventDefault();
-    const pageId = navItem.getAttribute("data-page");
-    if (pageId) {
-      switchPage(pageId);
+// Global Event Delegation for Navigation Items (capturing phase to ensure click works)
+document.addEventListener(
+  "click",
+  (e) => {
+    const navItem = e.target.closest(".nav-item");
+    if (navItem) {
+      e.preventDefault();
+      const pageId = navItem.getAttribute("data-page");
+      if (pageId) {
+        switchPage(pageId);
+      }
     }
-  }
-});
+  },
+  true,
+);
 
 let touchStartX = 0;
 let touchStartY = 0;
