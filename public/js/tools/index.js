@@ -625,7 +625,6 @@ function renderAm(res, host) {
     }
   }
 }
-}
 
 function mountAm() {
   const input = $("amInput");
